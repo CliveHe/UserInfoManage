@@ -12,9 +12,11 @@
 - Cookie实现记住密码功能
 
 ## 展示
+- 动态效果
 ![动态效果](https://ws2.sinaimg.cn/large/007ThgE5gy1g5c5l1dngij31hc0rrgmr.jpg)
-![Login](https://ws4.sinaimg.cn/large/007ThgE5gy1g5c5l1juplj31hc0rz3zf.jpg)
+- cookie记住密码
 ![cookie记住密码](https://ws1.sinaimg.cn/large/007ThgE5gy1g5c5q1rxipj31hc0u0ade.jpg)
+- 增删查改
 ![queryAllUser](https://ws1.sinaimg.cn/large/007ThgE5gy1g5c5l1rr8nj31hc0rwjuw.jpg)
 ![addUser](https://wx3.sinaimg.cn/large/007ThgE5gy1g5c5l0sin0j31hc0rumyq.jpg)
 ![updateUser](https://wx4.sinaimg.cn/large/007ThgE5gy1g5c5l1124dj31hc0rvq4o.jpg)
