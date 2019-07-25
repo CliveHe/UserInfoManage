@@ -4,6 +4,13 @@
  - 基础练手项目，非常简单。
  - 前端使用BootStrap开发，自适应。数据库连接池使用s3p0。
 
+##主要功能
+- 增删查改用户信息
+- 动态代理模式实现敏感词汇过滤
+- 登录验证过滤
+- js校验动态修改页面效果
+- Cookie实现记住密码功能
+
 ## 展示
 ![动态效果](https://ws2.sinaimg.cn/large/007ThgE5gy1g5c5l1dngij31hc0rrgmr.jpg)
 ![Login](https://ws4.sinaimg.cn/large/007ThgE5gy1g5c5l1juplj31hc0rz3zf.jpg)
@@ -11,8 +18,3 @@
 ![queryAllUser](https://ws1.sinaimg.cn/large/007ThgE5gy1g5c5l1rr8nj31hc0rwjuw.jpg)
 ![addUser](https://wx3.sinaimg.cn/large/007ThgE5gy1g5c5l0sin0j31hc0rumyq.jpg)
 ![updateUser](https://wx4.sinaimg.cn/large/007ThgE5gy1g5c5l1124dj31hc0rvq4o.jpg)
-
-- 动态代理模式实现敏感词汇过滤
-- 登录验证过滤
-- js校验动态修改页面效果
-- Cookie实现记住密码功能
