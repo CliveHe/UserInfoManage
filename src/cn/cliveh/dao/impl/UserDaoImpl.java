@@ -1,6 +1,10 @@
 package cn.cliveh.dao.impl;
 
 import cn.cliveh.dao.UserDao;
+<<<<<<< HEAD
+=======
+import cn.cliveh.domain.Admin;
+>>>>>>> add LoginFilter and SensitiveWordFilter
 import cn.cliveh.domain.User;
 import cn.cliveh.util.JDBCUtils;
 
@@ -11,13 +15,23 @@ import java.sql.SQLException;
 import java.util.*;
 
 /**
+<<<<<<< HEAD
  * @author CliveH
+=======
+ * @author <a href="http://cliveh.cn/"> CliveH </a>
+ * @version 1.1
+ * @date 2019/7/15
+>>>>>>> add LoginFilter and SensitiveWordFilter
  */
 public class UserDaoImpl implements UserDao {
     @Override
     public User query(String id) {
 
+<<<<<<< HEAD
         String sql = "select * from user where id=" + id + ";";
+=======
+        String sql = "select * from user where id=" + id;
+>>>>>>> add LoginFilter and SensitiveWordFilter
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -37,8 +51,11 @@ public class UserDaoImpl implements UserDao {
                 user.setAddress(resultSet.getString("address"));
                 user.setQq(resultSet.getString("qq"));
                 user.setEmail(resultSet.getString("email"));
+<<<<<<< HEAD
                 user.setUsername(resultSet.getString("username"));
                 user.setPassword(resultSet.getString("password"));
+=======
+>>>>>>> add LoginFilter and SensitiveWordFilter
 
                 return user;
             }
@@ -46,6 +63,7 @@ public class UserDaoImpl implements UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
+<<<<<<< HEAD
             //JDBCUtils.release(connection, preparedStatement);
             if (resultSet != null) {
                 try {
@@ -55,6 +73,9 @@ public class UserDaoImpl implements UserDao {
                 }
                 resultSet = null;
             }
+=======
+            JDBCUtils.release(connection, preparedStatement, resultSet);
+>>>>>>> add LoginFilter and SensitiveWordFilter
         }
 
         return null;
@@ -83,8 +104,11 @@ public class UserDaoImpl implements UserDao {
                 users.setAddress(resultSet.getString("address"));
                 users.setQq(resultSet.getString("qq"));
                 users.setEmail(resultSet.getString("email"));
+<<<<<<< HEAD
                 users.setUsername(resultSet.getString("username"));
                 users.setPassword(resultSet.getString("password"));
+=======
+>>>>>>> add LoginFilter and SensitiveWordFilter
 
                 userList.add(users);
 
@@ -95,6 +119,7 @@ public class UserDaoImpl implements UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
+<<<<<<< HEAD
             JDBCUtils.release(connection, preparedStatement);
             if (resultSet != null) {
                 try {
@@ -104,6 +129,9 @@ public class UserDaoImpl implements UserDao {
                 }
                 resultSet = null;
             }
+=======
+            JDBCUtils.release(connection, preparedStatement, resultSet);
+>>>>>>> add LoginFilter and SensitiveWordFilter
         }
 
         return null;
@@ -112,7 +140,11 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void addUser(User user) {
 
+<<<<<<< HEAD
         String sql = "insert into user values(null,?,?,?,?,?,?,?,?);";
+=======
+        String sql = "insert into user values(null,?,?,?,?,?,?);";
+>>>>>>> add LoginFilter and SensitiveWordFilter
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
@@ -127,8 +159,11 @@ public class UserDaoImpl implements UserDao {
             preparedStatement.setString(4, user.getAddress());
             preparedStatement.setString(5, user.getQq());
             preparedStatement.setString(6, user.getEmail());
+<<<<<<< HEAD
             preparedStatement.setString(7, user.getUsername());
             preparedStatement.setString(8, user.getPassword());
+=======
+>>>>>>> add LoginFilter and SensitiveWordFilter
 
             preparedStatement.executeUpdate();
 
@@ -143,7 +178,11 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void delete(String id) {
 
+<<<<<<< HEAD
         String sql = "delete from user where id=" + id + ";";
+=======
+        String sql = "delete from user where id=" + id;
+>>>>>>> add LoginFilter and SensitiveWordFilter
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
@@ -161,7 +200,11 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void update(User user) {
 
+<<<<<<< HEAD
         String sql = "update user set name=?, gender=?, age=?, address=?, qq=?, email=?, username=?, password=? where id=?;";
+=======
+        String sql = "update user set name=?, gender=?, age=?, address=?, qq=?, email=? where id=?;";
+>>>>>>> add LoginFilter and SensitiveWordFilter
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
@@ -175,9 +218,13 @@ public class UserDaoImpl implements UserDao {
             preparedStatement.setString(4, user.getAddress());
             preparedStatement.setString(5, user.getQq());
             preparedStatement.setString(6, user.getEmail());
+<<<<<<< HEAD
             preparedStatement.setString(7, user.getUsername());
             preparedStatement.setString(8, user.getPassword());
             preparedStatement.setInt(9, user.getId());
+=======
+            preparedStatement.setInt(7, user.getId());
+>>>>>>> add LoginFilter and SensitiveWordFilter
 
             preparedStatement.executeUpdate();
 
@@ -190,12 +237,20 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+<<<<<<< HEAD
     public User checkUser(String username, String password) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         String sql = "SELECT * FROM user WHERE username='"+username+"' AND password="+password;
         System.out.println(sql);
+=======
+    public Admin checkAdmin(String username, String password) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        String sql = "SELECT * FROM admin WHERE username='"+username+"' AND password="+password;
+>>>>>>> add LoginFilter and SensitiveWordFilter
 
         try {
             connection = JDBCUtils.getConnection();
@@ -203,6 +258,7 @@ public class UserDaoImpl implements UserDao {
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()){
+<<<<<<< HEAD
                 User user = new User();
 
                 user.setId(resultSet.getInt("id"));
@@ -216,11 +272,21 @@ public class UserDaoImpl implements UserDao {
                 user.setPassword(resultSet.getString("password"));
 
                 return user;
+=======
+                Admin adminUser = new Admin();
+
+                adminUser.setUsername(resultSet.getString("username"));
+                adminUser.setPassword(resultSet.getString("password"));
+                adminUser.setName(resultSet.getString("name"));
+
+                return adminUser;
+>>>>>>> add LoginFilter and SensitiveWordFilter
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+<<<<<<< HEAD
         return null;
     }
 
@@ -231,5 +297,10 @@ public class UserDaoImpl implements UserDao {
         for (User user : users) {
             System.out.println(user);
         }
+=======
+
+        //数据库中匹配用户不到就返回null
+        return null;
+>>>>>>> add LoginFilter and SensitiveWordFilter
     }
 }

@@ -3,7 +3,13 @@ package cn.cliveh.domain;
 import java.io.Serializable;
 
 /**
+<<<<<<< HEAD
  * @author CliveH
+=======
+ * @author <a href="http://cliveh.cn/"> CliveH </a>
+ * @version 1.1
+ * @date 2019/7/15
+>>>>>>> add LoginFilter and SensitiveWordFilter
  */
 public class User implements Serializable {
     private int id;
@@ -14,9 +20,12 @@ public class User implements Serializable {
     private String qq;
     private String email;
 
+<<<<<<< HEAD
     private String username;
     private String password;
 
+=======
+>>>>>>> add LoginFilter and SensitiveWordFilter
     public User() {
     }
 
@@ -48,6 +57,7 @@ public class User implements Serializable {
         return email;
     }
 
+<<<<<<< HEAD
     public String getUsername() {
         return username;
     }
@@ -56,6 +66,8 @@ public class User implements Serializable {
         return password;
     }
 
+=======
+>>>>>>> add LoginFilter and SensitiveWordFilter
     public void setId(int id) {
         this.id = id;
     }
@@ -84,6 +96,7 @@ public class User implements Serializable {
         this.email = email;
     }
 
+<<<<<<< HEAD
     public void setUsername(String username) {
         this.username = username;
     }
@@ -92,6 +105,8 @@ public class User implements Serializable {
         this.password = password;
     }
 
+=======
+>>>>>>> add LoginFilter and SensitiveWordFilter
     @Override
     public String toString() {
         return "User{" +
@@ -102,8 +117,11 @@ public class User implements Serializable {
                 ", address='" + address + '\'' +
                 ", qq='" + qq + '\'' +
                 ", email='" + email + '\'' +
+<<<<<<< HEAD
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+=======
+>>>>>>> add LoginFilter and SensitiveWordFilter
                 '}';
     }
 }

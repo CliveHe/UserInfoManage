@@ -1,13 +1,23 @@
 package cn.cliveh.dao.impl;
 
+<<<<<<< HEAD
+=======
+import cn.cliveh.domain.Admin;
+>>>>>>> add LoginFilter and SensitiveWordFilter
 import cn.cliveh.domain.User;
 import org.junit.Assert;
 import org.junit.Test;
 
+<<<<<<< HEAD
 import java.util.List;
 
 import static org.junit.Assert.*;
 
+=======
+import java.util.Arrays;
+import java.util.List;
+
+>>>>>>> add LoginFilter and SensitiveWordFilter
 public class UserDaoImplTest {
 
     @Test
@@ -37,8 +47,11 @@ public class UserDaoImplTest {
         user.setAddress("湖南省");
         user.setQq("987654321");
         user.setEmail("px2333@qq.com");
+<<<<<<< HEAD
         user.setUsername("px333");
         user.setPassword("19970321333");
+=======
+>>>>>>> add LoginFilter and SensitiveWordFilter
 
         UserDaoImpl ud = new UserDaoImpl();
         ud.addUser(user);
@@ -60,17 +73,26 @@ public class UserDaoImplTest {
         user.setAddress("湖南省");
         user.setQq("123456789");
         user.setEmail("px@qq.com");
+<<<<<<< HEAD
         user.setUsername("px");
         user.setPassword("19970321");
+=======
+>>>>>>> add LoginFilter and SensitiveWordFilter
 
         UserDaoImpl ud = new UserDaoImpl();
         ud.update(user);
     }
 
     @Test
+<<<<<<< HEAD
     public void checkUser(){
         UserDaoImpl ud = new UserDaoImpl();
         User user = ud.checkUser("cliveh","123456");
+=======
+    public void checkAdmin(){
+        UserDaoImpl ud = new UserDaoImpl();
+        Admin user = ud.checkAdmin("cliveh","123456");
+>>>>>>> add LoginFilter and SensitiveWordFilter
         System.out.println(user);
     }
 }

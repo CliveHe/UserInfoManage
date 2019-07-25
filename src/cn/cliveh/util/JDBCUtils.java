@@ -5,6 +5,10 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+<<<<<<< HEAD
+=======
+import java.sql.ResultSet;
+>>>>>>> add LoginFilter and SensitiveWordFilter
 import java.sql.SQLException;
 
 /**@author CliveH
@@ -55,4 +59,19 @@ public class JDBCUtils {
             connection = null;
         }
     }
+<<<<<<< HEAD
+=======
+
+    public static void release(Connection connection, PreparedStatement preparedStatement, ResultSet resultSet) {
+        JDBCUtils.release(connection, preparedStatement);
+        if (resultSet != null) {
+            try {
+                resultSet.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            resultSet = null;
+        }
+    }
+>>>>>>> add LoginFilter and SensitiveWordFilter
 }

@@ -18,9 +18,12 @@ import java.io.IOException;
 public class AddUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+<<<<<<< HEAD
         //设置request对象的解码方式
         request.setCharacterEncoding("utf-8");
 
+=======
+>>>>>>> add LoginFilter and SensitiveWordFilter
         //封装数据
         User user = new User();
         user.setName(request.getParameter("name"));
