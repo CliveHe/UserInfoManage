@@ -1,28 +1,35 @@
 package cn.cliveh.dao.impl;
 
+import cn.cliveh.dao.AdminDao;
+import cn.cliveh.dao.UserDao;
+import cn.cliveh.domain.Admin;
 import cn.cliveh.domain.User;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
-
-public class UserDaoImplTest {
+/**
+ * 持久层测试
+ * @author <a href="http://cliveh.cn/"> CliveH </a>
+ * @version 1.1
+ * @date 2019/7/15
+ */
+public class DaoImplTest {
 
     @Test
     public void query(){
-        UserDaoImpl ud = new UserDaoImpl();
+        UserDao dao = new UserDaoImpl();
         //User user = new User();
-        User user = ud.query("1");
+        User user = dao.query("1");
         System.out.println(user);
         Assert.assertEquals(user.getName(),"何智强");
     }
 
     @Test
     public void queryAllUser() {
-        UserDaoImpl userDao = new UserDaoImpl();
-        List<User> users = userDao.queryAllUser();
+        UserDao dao = new UserDaoImpl();
+        List<User> users = dao.queryAllUser();
         for (User user : users) {
             System.out.println(user);
         }
@@ -37,17 +44,15 @@ public class UserDaoImplTest {
         user.setAddress("湖南省");
         user.setQq("987654321");
         user.setEmail("px2333@qq.com");
-        user.setUsername("px333");
-        user.setPassword("19970321333");
 
-        UserDaoImpl ud = new UserDaoImpl();
-        ud.addUser(user);
+        UserDao dao = new UserDaoImpl();
+        dao.addUser(user);
     }
 
     @Test
     public void delete() {
-        UserDaoImpl ud = new UserDaoImpl();
-        ud.delete("7");
+        UserDao dao = new UserDaoImpl();
+        dao.delete("7");
     }
 
     @Test
@@ -60,17 +65,16 @@ public class UserDaoImplTest {
         user.setAddress("湖南省");
         user.setQq("123456789");
         user.setEmail("px@qq.com");
-        user.setUsername("px");
-        user.setPassword("19970321");
 
-        UserDaoImpl ud = new UserDaoImpl();
-        ud.update(user);
+        UserDao dao = new UserDaoImpl();
+        dao.update(user);
     }
 
     @Test
-    public void checkUser(){
-        UserDaoImpl ud = new UserDaoImpl();
-        User user = ud.checkUser("cliveh","123456");
+    public void checkAdmin(){
+        AdminDao dao = new AdminDaoImpl();
+        Admin user = dao.checkAdmin("cliveh","123456");
+
         System.out.println(user);
     }
 }

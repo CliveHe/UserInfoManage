@@ -1,15 +1,12 @@
 package cn.cliveh.service;
 
-import cn.cliveh.dao.impl.UserDaoImpl;
-import cn.cliveh.domain.User;
+import cn.cliveh.domain.Admin;
 
 /**
- * @author CliveH
+ * @author <a href="http://cliveh.cn/"> CliveH </a>
+ * @version 1.0
+ * @date 2019/7/25
  */
-public class LoginService {
-    private UserDaoImpl udi = new UserDaoImpl();
-
-    public User login(String name, String password) {
-        return udi.checkUser(name, password);
-    }
+public interface LoginService {
+    public Admin login(String name, String password);
 }

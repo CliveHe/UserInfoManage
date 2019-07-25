@@ -1,6 +1,7 @@
 package cn.cliveh.dao.impl;
 
 import cn.cliveh.dao.UserDao;
+import cn.cliveh.domain.Admin;
 import cn.cliveh.domain.User;
 import cn.cliveh.util.JDBCUtils;
 
@@ -8,16 +9,20 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * @author CliveH
+ * 持久层实现类
+ * @author <a href="http://cliveh.cn/"> CliveH </a>
+ * @version 1.1
+ * @date 2019/7/15
  */
 public class UserDaoImpl implements UserDao {
     @Override
     public User query(String id) {
 
-        String sql = "select * from user where id=" + id + ";";
+        String sql = "select * from user where id=" + id;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -37,8 +42,6 @@ public class UserDaoImpl implements UserDao {
                 user.setAddress(resultSet.getString("address"));
                 user.setQq(resultSet.getString("qq"));
                 user.setEmail(resultSet.getString("email"));
-                user.setUsername(resultSet.getString("username"));
-                user.setPassword(resultSet.getString("password"));
 
                 return user;
             }
@@ -46,15 +49,9 @@ public class UserDaoImpl implements UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            //JDBCUtils.release(connection, preparedStatement);
-            if (resultSet != null) {
-                try {
-                    resultSet.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-                resultSet = null;
-            }
+
+            JDBCUtils.release(connection, preparedStatement, resultSet);
+
         }
 
         return null;
@@ -83,8 +80,6 @@ public class UserDaoImpl implements UserDao {
                 users.setAddress(resultSet.getString("address"));
                 users.setQq(resultSet.getString("qq"));
                 users.setEmail(resultSet.getString("email"));
-                users.setUsername(resultSet.getString("username"));
-                users.setPassword(resultSet.getString("password"));
 
                 userList.add(users);
 
@@ -95,15 +90,9 @@ public class UserDaoImpl implements UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            JDBCUtils.release(connection, preparedStatement);
-            if (resultSet != null) {
-                try {
-                    resultSet.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-                resultSet = null;
-            }
+
+            JDBCUtils.release(connection, preparedStatement, resultSet);
+
         }
 
         return null;
@@ -112,7 +101,8 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void addUser(User user) {
 
-        String sql = "insert into user values(null,?,?,?,?,?,?,?,?);";
+        String sql = "insert into user values(null,?,?,?,?,?,?);";
+
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
@@ -127,8 +117,6 @@ public class UserDaoImpl implements UserDao {
             preparedStatement.setString(4, user.getAddress());
             preparedStatement.setString(5, user.getQq());
             preparedStatement.setString(6, user.getEmail());
-            preparedStatement.setString(7, user.getUsername());
-            preparedStatement.setString(8, user.getPassword());
 
             preparedStatement.executeUpdate();
 
@@ -143,7 +131,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void delete(String id) {
 
-        String sql = "delete from user where id=" + id + ";";
+        String sql = "delete from user where id=" + id;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
@@ -161,7 +149,8 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void update(User user) {
 
-        String sql = "update user set name=?, gender=?, age=?, address=?, qq=?, email=?, username=?, password=? where id=?;";
+        String sql = "update user set name=?, gender=?, age=?, address=?, qq=?, email=? where id=?;";
+
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
@@ -175,9 +164,7 @@ public class UserDaoImpl implements UserDao {
             preparedStatement.setString(4, user.getAddress());
             preparedStatement.setString(5, user.getQq());
             preparedStatement.setString(6, user.getEmail());
-            preparedStatement.setString(7, user.getUsername());
-            preparedStatement.setString(8, user.getPassword());
-            preparedStatement.setInt(9, user.getId());
+            preparedStatement.setInt(7, user.getId());
 
             preparedStatement.executeUpdate();
 
@@ -187,49 +174,5 @@ public class UserDaoImpl implements UserDao {
             JDBCUtils.release(connection, preparedStatement);
         }
 
-    }
-
-    @Override
-    public User checkUser(String username, String password) {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        String sql = "SELECT * FROM user WHERE username='"+username+"' AND password="+password;
-        System.out.println(sql);
-
-        try {
-            connection = JDBCUtils.getConnection();
-            preparedStatement = connection.prepareStatement(sql);
-            resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()){
-                User user = new User();
-
-                user.setId(resultSet.getInt("id"));
-                user.setName(resultSet.getString("name"));
-                user.setGender(resultSet.getString("gender"));
-                user.setAge(resultSet.getInt("age"));
-                user.setAddress(resultSet.getString("address"));
-                user.setQq(resultSet.getString("qq"));
-                user.setEmail(resultSet.getString("email"));
-                user.setUsername(resultSet.getString("username"));
-                user.setPassword(resultSet.getString("password"));
-
-                return user;
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public static void main(String[] args) {
-        UserDaoImpl userDao = new UserDaoImpl();
-        List<User> users = userDao.queryAllUser();
-
-        for (User user : users) {
-            System.out.println(user);
-        }
     }
 }

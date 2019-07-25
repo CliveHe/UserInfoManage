@@ -1,12 +1,15 @@
 package cn.cliveh.dao;
 
+import cn.cliveh.domain.Admin;
 import cn.cliveh.domain.User;
 
 import java.util.List;
 
 /**
- * @author CliveH
- * @date 2019/7/13
+ * 持久层接口
+ * @author <a href="http://cliveh.cn/"> CliveH </a>
+ * @version 1.1
+ * @date 2019/7/15
  */
 public interface UserDao {
     /**
@@ -34,8 +37,4 @@ public interface UserDao {
      */
     public void update(User user);
 
-    /**
-     * 判断用户是否存在
-     */
-    public User checkUser(String username, String password);
 }

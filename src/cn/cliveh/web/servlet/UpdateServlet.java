@@ -1,8 +1,7 @@
 package cn.cliveh.web.servlet;
 
-import cn.cliveh.dao.impl.UserDaoImpl;
 import cn.cliveh.domain.User;
-import cn.cliveh.service.UserService;
+import cn.cliveh.service.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,14 +12,17 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * @author CliveH
+ * 更新用户信息
+ * @author <a href="http://cliveh.cn/"> CliveH </a>
+ * @version 1.0
+ * @date 2019/7/15
  */
 @WebServlet(name = "UpdateServlet", urlPatterns = "/updateServlet")
 public class UpdateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        request.setCharacterEncoding("utf-8");
+        //request.setCharacterEncoding("utf-8");
 
         //获取session里的updateID，用来进行更新操作
         HttpSession session = request.getSession(false);
@@ -38,7 +40,7 @@ public class UpdateServlet extends HttpServlet {
         user.setEmail(request.getParameter("email"));
 
         ////调用service完成修改操作
-        UserService service = new UserService();
+        UserServiceImpl service = new UserServiceImpl();
         service.updateUser(user);
 
         //跳转页面

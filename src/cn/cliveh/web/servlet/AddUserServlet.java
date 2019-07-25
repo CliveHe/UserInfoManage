@@ -1,8 +1,7 @@
 package cn.cliveh.web.servlet;
 
-import cn.cliveh.dao.impl.UserDaoImpl;
 import cn.cliveh.domain.User;
-import cn.cliveh.service.UserService;
+import cn.cliveh.service.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,14 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @author CliveH
+ * 添加用户信息
+ * @author <a href="http://cliveh.cn/"> CliveH </a>
+ * @version 1.0
+ * @date 2019/7/15
  */
 @WebServlet(name = "AddUserServlet", urlPatterns = "/addUserServlet")
 public class AddUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //设置request对象的解码方式
-        request.setCharacterEncoding("utf-8");
 
         //封装数据
         User user = new User();
@@ -32,7 +32,7 @@ public class AddUserServlet extends HttpServlet {
         user.setEmail(request.getParameter("email"));
 
         //调用service完成添加用户操作
-        UserService service = new UserService();
+        UserServiceImpl service = new UserServiceImpl();
         service.addUser(user);
 
         //跳转页面

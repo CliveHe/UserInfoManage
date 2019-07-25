@@ -5,10 +5,11 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**@author CliveH
- * @date 2019/07/14
+ * @date 2019/07/15
  * @ JDBC工具类，使用c3p0连接池
  */
 public class JDBCUtils {
@@ -53,6 +54,18 @@ public class JDBCUtils {
                 e.printStackTrace();
             }
             connection = null;
+        }
+    }
+
+    public static void release(Connection connection, PreparedStatement preparedStatement, ResultSet resultSet) {
+        JDBCUtils.release(connection, preparedStatement);
+        if (resultSet != null) {
+            try {
+                resultSet.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            resultSet = null;
         }
     }
 }

@@ -1,7 +1,6 @@
 package cn.cliveh.web.servlet;
 
-import cn.cliveh.dao.impl.UserDaoImpl;
-import cn.cliveh.service.UserService;
+import cn.cliveh.service.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @author CliveH
+ * 删除用户信息
+ * @author <a href="http://cliveh.cn/"> CliveH </a>
+ * @version 1.0
+ * @date 2019/7/15
  */
 @WebServlet(name = "DeleteServlet", urlPatterns = "/deleteServlet")
 public class DeleteServlet extends HttpServlet {
@@ -21,7 +23,7 @@ public class DeleteServlet extends HttpServlet {
         String id = request.getParameter("id");
 
         ////调用service完成删除操作
-        UserService service = new UserService();
+        UserServiceImpl service = new UserServiceImpl();
         service.deleteUser(id);
 
         //跳转页面

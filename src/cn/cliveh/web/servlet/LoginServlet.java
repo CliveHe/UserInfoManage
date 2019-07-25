@@ -1,8 +1,7 @@
 package cn.cliveh.web.servlet;
 
-import cn.cliveh.dao.impl.UserDaoImpl;
-import cn.cliveh.domain.User;
-import cn.cliveh.service.LoginService;
+import cn.cliveh.domain.Admin;
+import cn.cliveh.service.impl.LoginServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +12,10 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * @author CliveH
+ * 管理员登录
+ * @author <a href="http://cliveh.cn/"> CliveH </a>
+ * @version 1.0
+ * @date 2019/7/15
  */
 @WebServlet(name = "LoginServlet",urlPatterns = "/loginServlet")
 public class LoginServlet extends HttpServlet {
@@ -23,19 +25,21 @@ public class LoginServlet extends HttpServlet {
         String name = request.getParameter("username");
         String password = request.getParameter("password");
 
-        //调用service完成登录操作
-        LoginService service = new LoginService();
-        User user = service.login(name, password);
+        //调用service获取数据库中查询的User对象
+        LoginServiceImpl service = new LoginServiceImpl();
+        Admin adminUser = service.login(name, password);
 
         HttpSession session = request.getSession();
 
-        if(user != null){
+        if(adminUser != null){
             //将用户存入session
-            session.setAttribute("user",user);
+            session.setAttribute("adminUser",adminUser);
             //跳转页面
             response.sendRedirect(request.getContextPath()+"/queryAllUserServlet");
         }else {
-            response.sendRedirect(request.getContextPath()+"/login.jsp");
+            //提示登录错误信息
+            request.setAttribute("loginError", "loginError");
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
         }
     }
 

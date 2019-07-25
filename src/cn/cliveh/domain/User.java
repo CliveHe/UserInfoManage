@@ -3,7 +3,10 @@ package cn.cliveh.domain;
 import java.io.Serializable;
 
 /**
- * @author CliveH
+ * 用户JavaBean
+ * @author <a href="http://cliveh.cn/"> CliveH </a>
+ * @version 1.1
+ * @date 2019/7/15
  */
 public class User implements Serializable {
     private int id;
@@ -13,9 +16,6 @@ public class User implements Serializable {
     private String address;
     private String qq;
     private String email;
-
-    private String username;
-    private String password;
 
     public User() {
     }
@@ -48,14 +48,6 @@ public class User implements Serializable {
         return email;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
     public void setId(int id) {
         this.id = id;
     }
@@ -84,14 +76,6 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     @Override
     public String toString() {
         return "User{" +
@@ -102,8 +86,6 @@ public class User implements Serializable {
                 ", address='" + address + '\'' +
                 ", qq='" + qq + '\'' +
                 ", email='" + email + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
                 '}';
     }
 }
