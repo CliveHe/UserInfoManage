@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<html lang="zh-CN">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -55,8 +55,19 @@
             if (loginError === "loginError") {
                 alert("账号或密码错误！");
             }
+
+            //获取登录页面的url
+            var getUrl = function (){
+                var url = document.URL.toString();
+                var arrUrl = url.split("/");
+                var urlStr = arrUrl[0]+"//"+arrUrl[2]+"/"+arrUrl[3]+"/";
+                return urlStr;
+            }
+            //浏览器网址框的url
+            var urlBox = document.URL;
+            //弹出未登录警告
             var login_msg = "<%=request.getAttribute("login_msg")%>";
-            if (login_msg !== "null") {
+            if (login_msg !== "null" &&(urlBox !== getUrl())) {    //登录页面不弹出未登录警告
                 alert(login_msg);
             }
 
@@ -87,7 +98,7 @@
                     document.getElementById("username").onblur = checkUsername;
                 }else if (username !== '') {    //若输入框为空，则不提示输入错误
                     inputUsername.innerHTML = "<div class=\"form-group has-error has-feedback\">\n" +
-                        "  <label class=\"control-label\" for=\"inputError2\">输入错误</label>\n" +
+                        "  <label class=\"control-label\" for=\"inputError2\">格式错误</label>\n" +
                         "  <input type=\"text\" value='"+username+"' placeholder=\"请输入6-12位数字或字母\" class=\"form-control\" id=\"username\" aria-describedby=\"inputError2Status\">\n" +
                         "  <span class=\"glyphicon glyphicon-remove form-control-feedback\" aria-hidden=\"true\"></span>\n" +
                         "  <span id=\"inputError2Status\" class=\"sr-only\">(error)</span>\n" +
@@ -121,7 +132,7 @@
                     document.getElementById("password").onblur = checkPassword;
                 }else if (password !== '') {    //若输入框为空，则不提示输入错误
                     inputPassword.innerHTML = "<div class=\"form-group has-error has-feedback\">\n" +
-                        "  <label class=\"control-label\" for=\"inputError2\">输入错误</label>\n" +
+                        "  <label class=\"control-label\" for=\"inputError2\">格式错误</label>\n" +
                         "  <input type=\"password\" value='"+password+"' placeholder=\"请输入6-12位数字或字母\" class=\"form-control\" id=\"password\" aria-describedby=\"inputError2Status\">\n" +
                         "  <span class=\"glyphicon glyphicon-remove form-control-feedback\" aria-hidden=\"true\"></span>\n" +
                         "  <span id=\"inputError2Status\" class=\"sr-only\">(error)</span>\n" +
@@ -216,12 +227,12 @@
                     var cookie_password = getCookie(password_key);
 
                     document.getElementById("inputUsername").innerHTML = "<div id=\"inputUsername\">\n" +
-                        "                <label class=\"control-label label-color\" for=\"username\">User name:</label>\n" +
+                        "                <label class=\"control-label label-color\" for=\"username\">用户名：</label>\n" +
                         "                <label for=\"username\" class=\"sr-only\">请输入6-12位数字或字母</label>\n" +
                         "                <input type=\"text\" name=\"username\" id=\"username\" value='"+cookie_username+"' class=\"form-control\" placeholder=\"请输入6-12位数字或字母\" required autofocus>\n" +
                         "            </div>";
                     document.getElementById("inputPassword").innerHTML = "<div id=\"inputPassword\">\n" +
-                        "                <label class=\"control-label label-color\" for=\"password\">Password:</label>\n" +
+                        "                <label class=\"control-label label-color\" for=\"password\">密码：</label>\n" +
                         "                <label for=\"password\" class=\"sr-only\">请输入6-12位数字或字母</label>\n" +
                         "                <input type=\"password\" name=\"password\" id=\"password\" value='"+cookie_password+"' class=\"form-control\" placeholder=\"请输入6-12位数字或字母\" required>\n" +
                         "            </div>";
@@ -254,13 +265,13 @@
                     delCookie(remember_me_key);
 
                     document.getElementById("inputUsername").innerHTML = "<div id=\"inputUsername\">\n" +
-                        "                <label class=\"control-label label-color\" for=\"username\">User name:</label>\n" +
+                        "                <label class=\"control-label label-color\" for=\"username\">用户名：</label>\n" +
                         "                <label for=\"username\" class=\"sr-only\">请输入6-12位数字或字母</label>\n" +
                         "                <input type=\"text\" name=\"username\" id=\"username\" class=\"form-control\" placeholder=\"请输入6-12位数字或字母\" required autofocus>\n" +
                         "                <!--<span id=\"s_username\" class=\"error\"></span>-->\n" +
                         "            </div>";
                     document.getElementById("inputPassword").innerHTML = "<div id=\"inputPassword\">\n" +
-                        "                <label class=\"control-label label-color\" for=\"password\">Password:</label>\n" +
+                        "                <label class=\"control-label label-color\" for=\"password\">密码：</label>\n" +
                         "                <label for=\"password\" class=\"sr-only\">请输入6-12位数字或字母</label>\n" +
                         "                <input type=\"password\" name=\"password\" id=\"password\" class=\"form-control\" placeholder=\"请输入6-12位数字或字母\" required>\n" +
                         "            </div>";
@@ -268,6 +279,17 @@
                 }
             };
 
+        };
+
+        //刷新验证码
+        function refreshCode () {
+            var img = document.getElementById("vcode");
+            img.onclick = function () {
+                //时间戳，返回的是毫秒数
+                var time = new Date().getTime();
+                //使用变化的毫秒值使src链接不固定，不然链接不改变浏览器不会刷新此链接
+                img.src = "${pageContext.request.contextPath}/checkCodeServlet?"+time;
+            }
         }
     </script>
 
@@ -286,16 +308,24 @@
             <h2 class="form-signin-heading" style="color: rgb(51,122,183)">请登录</h2>
             <br>
             <div id="inputUsername">
-                <label class="control-label label-color" for="username">User name:</label>
+                <label class="control-label label-color" for="username">用户名：</label>
                 <label for="username" class="sr-only">请输入6-12位数字或字母</label>
                 <input type="text" name="username" id="username" class="form-control" placeholder="请输入6-12位数字或字母" required autofocus>
                 <!--<span id="s_username" class="error"></span>-->
             </div>
             <br>
             <div id="inputPassword">
-                <label class="control-label label-color" for="password">Password:</label>
+                <label class="control-label label-color" for="password">密码：</label>
                 <label for="password" class="sr-only">请输入6-12位数字或字母</label>
                 <input type="password" name="password" id="password" class="form-control" placeholder="请输入6-12位数字或字母" required>
+            </div>
+            <br>
+            <div class="form-inline">
+                <label class="control-label label-color" for="vcode">验证码：</label>
+                <input type="text" name="verifycode" class="form-control" id="verifycode" placeholder="请输入验证码" autocomplete="off" style="width: 120px;"/>
+                <a href="javascript:void(0);" onclick="refreshCode()">
+                    <img src="${pageContext.request.contextPath}/checkCodeServlet" title="看不清点击刷新" id="vcode"/>
+                </a>
             </div>
             <div class="checkbox">
                 <label>
