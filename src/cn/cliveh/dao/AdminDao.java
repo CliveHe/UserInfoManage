@@ -10,6 +10,8 @@ import cn.cliveh.domain.Admin;
 public interface AdminDao {
     /**
      * 判断管理员是否存在
+     * @param username
+     * @param password
      */
     public Admin checkAdmin(String username, String password);
 }

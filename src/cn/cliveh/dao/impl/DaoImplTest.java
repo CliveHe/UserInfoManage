@@ -7,7 +7,9 @@ import cn.cliveh.domain.User;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 持久层测试
@@ -76,5 +78,27 @@ public class DaoImplTest {
         Admin user = dao.checkAdmin("cliveh","123456");
 
         System.out.println(user);
+    }
+
+    @Test
+    public void getTotalCount(){
+        Map<String, String[]> condition = new HashMap<>();
+        String[] arr = {"李志文"};
+        condition.put("name",arr);
+        UserDao dao = new UserDaoImpl();
+        int totalCount = dao.getTotalCount(condition);
+        System.out.println(totalCount);
+    }
+
+    @Test
+    public void findByPage(){
+        Map<String, String[]> condition = new HashMap<>();
+        String[] arr = {"李志文"};
+        condition.put("name",arr);
+        UserDao dao = new UserDaoImpl();
+        List<User> byPage = dao.findByPage(2, 3, condition);
+        for (User user : byPage) {
+            System.out.println(user);
+        }
     }
 }

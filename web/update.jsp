@@ -67,7 +67,11 @@
         <label for="email">Email</label>
         <input type="email" name="email" class="form-control" id="email" value="${updateUser.email}">
       </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">确认修改</button>
+      <div class="form-group" style="text-align: center">
+        <input class="btn btn-primary" type="submit" value="提交" />
+        <input class="btn btn-default" type="reset" value="重置" />
+        <a class="btn btn-default" href="${pageContext.request.contextPath}/list.jsp" role="button">返回</a>
+      </div>
     </form>
   </div>
 </div>

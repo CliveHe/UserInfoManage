@@ -1,8 +1,10 @@
 package cn.cliveh.service;
 
+import cn.cliveh.domain.Paging;
 import cn.cliveh.domain.User;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author <a href="http://cliveh.cn/"> CliveH </a>
@@ -25,6 +27,15 @@ public interface UserService {
     public User getUser(String id);
 
     /**
+     * 分页模糊查询
+     * @param currentPage
+     * @param rows
+     * @param condition
+     * @return Paging<User>
+     */
+    public Paging<User> findUserByPage(int currentPage, int rows, Map<String, String[]> condition);
+
+    /**
      * 修改用户信息
      * @param user
      */
@@ -40,5 +51,11 @@ public interface UserService {
      * @param user
      */
     public void addUser(User user);
+
+    /**
+     * 获取最后一页的index
+     * @return
+     */
+    public int getEndPage();
 
 }

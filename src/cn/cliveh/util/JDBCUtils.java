@@ -35,7 +35,9 @@ public class JDBCUtils {
     }
 
     /**
-     * 释放数据库连接
+     * 资源关闭
+     * @param connection
+     * @param preparedStatement
      */
     public static void release(Connection connection, PreparedStatement preparedStatement) {
         if (preparedStatement != null){
@@ -57,6 +59,12 @@ public class JDBCUtils {
         }
     }
 
+    /**
+     * 资源关闭
+     * @param connection
+     * @param preparedStatement
+     * @param resultSet
+     */
     public static void release(Connection connection, PreparedStatement preparedStatement, ResultSet resultSet) {
         JDBCUtils.release(connection, preparedStatement);
         if (resultSet != null) {

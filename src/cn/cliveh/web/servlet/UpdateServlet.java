@@ -43,8 +43,11 @@ public class UpdateServlet extends HttpServlet {
         UserServiceImpl service = new UserServiceImpl();
         service.updateUser(user);
 
+        //获取session记忆的修改时的页面
+        String updateCurrentPage = (String) session.getAttribute("updateCurrentPage");
+
         //跳转页面
-        request.getRequestDispatcher("/queryAllUserServlet").forward(request, response);
+        request.getRequestDispatcher("/queryUserByPagingServlet?currentPage="+updateCurrentPage+"&rows=6").forward(request, response);
 
     }
 

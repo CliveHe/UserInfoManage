@@ -34,6 +34,7 @@ public class LoginFilter implements Filter {
         if (uri.contains("/index.jsp")
                 || uri.contains("/login.jsp")
                 || uri.contains("/loginServlet")
+                || uri.contains("/checkCodeServlet")
                 || uri.contains("/css/")
                 || uri.contains("/fonts/")
                 || uri.contains("/js/"))

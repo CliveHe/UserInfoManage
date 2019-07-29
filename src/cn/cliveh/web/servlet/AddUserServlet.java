@@ -8,7 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * 添加用户信息
@@ -35,8 +37,12 @@ public class AddUserServlet extends HttpServlet {
         UserServiceImpl service = new UserServiceImpl();
         service.addUser(user);
 
+        //添加的数据在最后一页,故获取最后一页的页码
+        int currentPage = service.getEndPage();
+        System.out.println("endPageNumber"+currentPage);
+
         //跳转页面
-        request.getRequestDispatcher("/queryAllUserServlet").forward(request, response);
+        request.getRequestDispatcher("/queryUserByPagingServlet?currentPage="+currentPage+"&rows=6").forward(request, response);
 
     }
 

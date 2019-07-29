@@ -21,16 +21,25 @@ public class DeleteServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //获取要删除的用户id
         String id = request.getParameter("id");
+        //记住删除操作所在页面的页码
+        String currentPage = request.getParameter("currentPage");
 
-        ////调用service完成删除操作
+        //调用service完成删除操作
         UserServiceImpl service = new UserServiceImpl();
-        service.deleteUser(id);
 
-        //跳转页面
-        request.getRequestDispatcher("/queryAllUserServlet").forward(request, response);
+        //如果含有&就是批量删除
+        if (id.contains("&")){
+            String[] idArr = id.split("&");
+            for (String s : idArr) {
+                service.deleteUser(s);
+            }
 
-        //response.sendRedirect("new.jsp");//重定向到new.jsp
-        //response.sendRedirect(request.getContextPath()+"/UserInforManage_war_exploded/queryAllUserServlet");
+        }else{
+            service.deleteUser(id);
+            //跳转页面
+            request.getRequestDispatcher("/queryUserByPagingServlet?currentPage="+currentPage+"&rows=6").forward(request, response);
+        }
+
     }
 
     @Override

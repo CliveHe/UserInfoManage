@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Map;
+
 /**
  * 查询某个用户的信息
  * @author <a href="http://cliveh.cn/"> CliveH </a>
@@ -23,12 +25,15 @@ public class QueryUserServlet extends HttpServlet {
 
         //获取要查询的id
         String id = request.getParameter("id");
+        //记住修改操作所在的页面的页码
+        String currentPage = request.getParameter("currentPage");
 
         HttpSession session = request.getSession(false);
-        //将要修改的用户id存入session
+        //将要修改的用户id和页码存入session
         session.setAttribute("updateID",id);
+        session.setAttribute("updateCurrentPage",currentPage);
 
-        ////调用service完成获取用户信息操作
+        //调用service完成获取用户信息操作
         UserServiceImpl service = new UserServiceImpl();
         User updateUser = service.getUser(id);
 

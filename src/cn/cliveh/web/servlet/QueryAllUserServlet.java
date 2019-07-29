@@ -14,6 +14,8 @@ import java.util.List;
 
 /**
  * 查询全部的用户信息
+ * 此类已弃用！！！
+ * 现使用分页查询类queryUserByPagingServlet查询用户数据
  * @author <a href="http://cliveh.cn/"> CliveH </a>
  * @version 1.0
  * @date 2019/7/15
